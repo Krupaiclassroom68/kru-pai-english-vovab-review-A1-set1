@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A1 Galaxy Vocabulary Gate – Set 2</title>
+<style>
+  :root{
+    --bg1:#020617;--bg2:#0f172a;--panel:rgba(5,12,30,.82);--panel2:rgba(8,18,42,.92);
+    --line:rgba(96,165,250,.28);--cyan:#22d3ee;--cyan2:#67e8f9;--blue:#60a5fa;--violet:#8b5cf6;
+    --pink:#ec4899;--green:#22c55e;--yellow:#facc15;--red:#fb7185;--white:#e6f7ff;--muted:#9cc5e1;
+    --shadow:0 20px 60px rgba(0,0,0,.42);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--white);background:
+      radial-gradient(circle at 14% 18%, rgba(34,211,238,.17), transparent 26%),
+      radial-gradient(circle at 84% 16%, rgba(139,92,246,.16), transparent 24%),
+      radial-gradient(circle at 72% 76%, rgba(236,72,153,.12), transparent 24%),
+      linear-gradient(135deg,var(--bg1),var(--bg2));overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);background-size:42px 42px;opacity:.35}
+  .stars,.planets{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.75;box-shadow:0 0 8px #fff;animation:twinkle linear infinite}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.95;transform:scale(1.4)}}
+  .planet{position:absolute;border-radius:50%;filter:blur(.1px);opacity:.9;box-shadow:0 0 36px rgba(255,255,255,.08)}
+  .planet::after{content:"";position:absolute;inset:10% 12%;border-radius:50%;background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 36%)}
+
+  .wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:18px}
+  .screen{display:none;min-height:100vh;align-items:center;justify-content:center;padding:14px 0 28px}
+  .screen.active{display:flex}
+  .panel{width:min(100%,1120px);background:var(--panel);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);border-radius:30px;box-shadow:var(--shadow);padding:22px;position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;inset:-2px;background:linear-gradient(115deg,transparent 16%, rgba(103,232,249,.14) 32%, transparent 48%, rgba(139,92,246,.16) 72%, transparent 86%);pointer-events:none}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
+  h1{margin:.1rem 0 .8rem;font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.02;color:#fff;text-shadow:0 0 16px rgba(34,211,238,.38)}
+  .eyebrow,.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(103,232,249,.26);background:rgba(8,18,42,.78);font-weight:900;color:var(--cyan2);box-shadow:0 0 18px rgba(34,211,238,.12) inset}
+  .subtitle{font-size:clamp(1rem,2vw,1.24rem);line-height:1.72;color:var(--muted);max-width:720px}
+  .cta-row,.toolbar,.actions,.mini-actions{display:flex;flex-wrap:wrap;gap:10px}
+  .cta-row{margin-top:18px}
+  .btn{border:none;cursor:pointer;border-radius:18px;padding:14px 18px;font-size:1rem;font-weight:900;transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;box-shadow:0 12px 24px rgba(0,0,0,.25)}
+  .btn:hover{transform:translateY(-2px)} .btn:active{transform:scale(.98)}
+  .btn-primary{background:linear-gradient(180deg,#22d3ee,#0ea5e9);color:#03111d}
+  .btn-violet{background:linear-gradient(180deg,#a78bfa,#8b5cf6);color:#fff}
+  .btn-pink{background:linear-gradient(180deg,#f472b6,#ec4899);color:#fff}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.12)}
+  .btn-green{background:linear-gradient(180deg,#4ade80,#22c55e);color:#02250d}
+  .hero-side{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .sticker{background:rgba(8,18,42,.88);border:1px solid rgba(103,232,249,.18);border-radius:22px;padding:14px 12px;text-align:center;min-height:116px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .sticker .icon{font-size:2rem}
+  .sticker b{font-size:1.04rem}
+  .sticker span{color:var(--muted);font-size:.92rem}
+
+  .topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .hud{display:flex;flex-wrap:wrap;gap:10px}
+  .pill{padding:10px 14px;border-radius:999px;background:rgba(4,12,32,.9);border:1px solid rgba(103,232,249,.18);font-weight:900;box-shadow:0 0 14px rgba(34,211,238,.12) inset}
+  .mission{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 14px;background:rgba(8,18,42,.82);border-radius:18px;border:1px solid rgba(255,255,255,.08);margin-bottom:14px}
+  .mission-step{padding:8px 12px;border-radius:999px;font-weight:900;border:1px solid rgba(255,255,255,.08)}
+  .done{background:rgba(34,197,94,.16);color:#a7f3d0}.active-step{background:rgba(34,211,238,.16);color:var(--cyan2)}.locked{background:rgba(255,255,255,.04);color:#8ca9c3}
+
+  .progress-wrap{margin:14px 0 18px}
+  .progress-meta{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:900;color:var(--muted);margin-bottom:8px;flex-wrap:wrap}
+  .progress-track{height:18px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 18px rgba(34,211,238,.45);position:relative;transition:width .35s ease}
+  .progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);animation:shine 2s linear infinite}
+  @keyframes shine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+  .card-zone{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:stretch}
+  .card{position:relative;background:linear-gradient(180deg, rgba(10,23,52,.98), rgba(8,18,42,.96));border-radius:28px;border:1px solid rgba(103,232,249,.18);padding:22px;box-shadow:0 20px 48px rgba(0,0,0,.28)}
+  .card::before{content:"";position:absolute;inset:auto -20% 74% auto;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, rgba(34,211,238,.18), transparent 60%);pointer-events:none}
+  .card-small-title{color:var(--cyan2);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem}
+  .word{font-size:clamp(2.6rem,7vw,5.4rem);font-weight:1000;line-height:1;margin:.35rem 0 .45rem;color:#fff;text-shadow:0 0 20px rgba(34,211,238,.22)}
+  .phonetic{font-size:1.05rem;color:#8fd8ff;font-weight:900}
+  .meaning{font-size:clamp(1.2rem,3vw,2rem);font-weight:900;color:#fde68a;margin:10px 0 12px}
+  .example{font-size:clamp(1rem,2vw,1.18rem);color:var(--white);line-height:1.7;background:rgba(255,255,255,.04);padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.07);margin-top:12px}
+  .meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+  .meta-box{padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+  .meta-box b{display:block;font-size:.84rem;color:var(--muted);margin-bottom:6px}
+  .meta-box span{font-size:1.02rem;font-weight:900}
+  .side-panel{display:flex;flex-direction:column;gap:12px}
+  .mini-card{background:rgba(8,18,42,.88);border:1px solid rgba(255,255,255,.08);padding:14px;border-radius:22px}
+  .mini-card h3{margin:.1rem 0 .7rem;color:var(--cyan2)}
+  .status-line{font-weight:900;color:var(--yellow)}
+  .counter{font-size:1.7rem;font-weight:1000;color:#fff}
+  .known-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:rgba(34,197,94,.14);color:#bbf7d0;font-weight:900}
+  .again-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:rgba(251,113,133,.12);color:#fecdd3;font-weight:900}
+
+  .grid-panel{background:var(--panel2);border-radius:28px;padding:18px;border:1px solid rgba(255,255,255,.08)}
+  .grid-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .search{flex:1;min-width:240px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#fff;border-radius:16px;padding:13px 14px;font-size:1rem;font-weight:800;outline:none}
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .word-tile{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:136px;transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease}
+  .word-tile:hover{transform:translateY(-2px);border-color:rgba(103,232,249,.32);box-shadow:0 0 18px rgba(34,211,238,.12)}
+  .tile-word{font-size:1.3rem;font-weight:1000}
+  .tile-mean{color:#fde68a;font-weight:900}
+  .tile-tag{font-size:.84rem;color:var(--muted);font-weight:800}
+  .review-status{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;font-size:.82rem;font-weight:900;background:rgba(255,255,255,.05);width:max-content}
+  .review-status.known{background:rgba(34,197,94,.14);color:#bbf7d0}.review-status.again{background:rgba(251,113,133,.12);color:#fecdd3}
+
+  .summary-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+  .big-score{font-size:clamp(2.2rem,8vw,4.2rem);font-weight:1000;color:#fff;text-shadow:0 0 18px rgba(34,211,238,.2);margin:.1rem 0}
+  table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.03);border-radius:18px;overflow:hidden}
+  th,td{padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.07);text-align:left} th{color:var(--cyan2);font-size:.92rem}
+  .footer-note{margin-top:14px;color:var(--muted);line-height:1.7}
+
+  @media (max-width:960px){
+    .hero,.card-zone,.summary-grid{grid-template-columns:1fr}
+    .hero-side{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    .panel{padding:16px}.hero-side{grid-template-columns:1fr 1fr}.meta-grid{grid-template-columns:1fr}.word-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="planets" id="planets"></div>
+<div class="wrap">
+
+  <section class="screen active" id="startScreen">
+    <div class="panel">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">🌌 A1 • Galaxy Vocabulary Gate • Set 2</div>
+          <h1>คลังคำศัพท์<br>ก่อนเข้าสู่ภารกิจ</h1>
+          <div class="subtitle">
+            ทบทวนคำศัพท์ทั้งชุดก่อนเข้า A2 และ A3 แบบพรีเมียมในธีมกาแลคซี่บอล ✨<br>
+            ชุดนี้รวม <b>30 คำ</b> ที่ใช้ต่อยอดไปยังเกมฟังเสียงและเกมเติมคำในประโยค เพื่อให้เด็กคุ้นทั้ง <b>คำอ่าน • ความหมาย • การใช้จริง</b>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-primary" id="btnStartReview">🚀 เริ่มทบทวน</button>
+            <button class="btn btn-violet" id="btnOpenList">🧠 ดูคลังคำทั้งหมด</button>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="sticker"><div class="icon">🎧</div><b>ฟังได้ทีละคำ</b><span>กดฟังสำเนียงได้ทันที</span></div>
+          <div class="sticker"><div class="icon">🧠</div><b>รู้ความหมาย</b><span>มีคำแปลและตัวอย่างสั้น</span></div>
+          <div class="sticker"><div class="icon">📈</div><b>มี Progress Bar</b><span>เห็นความคืบหน้าชัดเจน</span></div>
+          <div class="sticker"><div class="icon">🛰️</div><b>ต่อเข้าชุด A2-A3</b><span>เรียนเป็นด่านต่อเนื่อง</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="reviewScreen">
+    <div class="panel">
+      <div class="topbar">
+        <div class="hud">
+          <div class="pill" id="hudCount">📘 คำที่ 1 / 30</div>
+          <div class="pill" id="hudKnown">✅ จำได้ 0</div>
+          <div class="pill" id="hudAgain">🔁 ทบทวนอีก 0</div>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-ghost" id="btnHome1">หน้าแรก</button>
+          <button class="btn btn-violet" id="btnList1">คลังทั้งหมด</button>
+        </div>
+      </div>
+
+      <div class="mission">
+        <div class="mission-step done">A1 Review ✅</div>
+        <div>→</div>
+        <div class="mission-step active-step">A2 Sound Clash 🔄</div>
+        <div>→</div>
+        <div class="mission-step locked">A3 Sentence Builder 🔒</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <div>Progress Bar • ทบทวนไปแล้ว <span id="progressText">1 / 30</span></div>
+          <div class="status-line" id="statusText">MISSION START</div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="card-zone">
+        <div class="card">
+          <div class="card-small-title" id="smallTitle">Signal 01</div>
+          <div class="word" id="wordText">rice</div>
+          <div class="phonetic" id="phoneticText">/raɪs/</div>
+          <div class="meaning" id="meaningText">ข้าว</div>
+          <div class="mini-actions" style="margin-bottom:12px">
+            <button class="btn btn-primary" id="btnSpeak">🔊 ฟังคำนี้</button>
+            <button class="btn btn-ghost" id="btnPrev">◀ ก่อนหน้า</button>
+            <button class="btn btn-ghost" id="btnNext">ถัดไป ▶</button>
+          </div>
+          <div class="example" id="exampleText">Example: I eat rice every day.</div>
+          <div class="meta-grid">
+            <div class="meta-box"><b>หมวดคำ</b><span id="typeText">Noun / Verb</span></div>
+            <div class="meta-box"><b>คู่คำใกล้เสียง</b><span id="pairText">rise</span></div>
+          </div>
+        </div>
+
+        <div class="side-panel">
+          <div class="mini-card">
+            <h3>การ์ดจำคำ</h3>
+            <div class="counter" id="bigIndex">01</div>
+            <div style="color:var(--muted);line-height:1.7">กดฟังแล้วตัดสินใจว่าเด็ก “จำได้แล้ว” หรือ “ควรทบทวนอีก” เพื่อเตรียมพร้อมก่อนเล่นจริง</div>
+          </div>
+          <div class="mini-card">
+            <h3>สถานะคำนี้</h3>
+            <div class="mini-actions">
+              <button class="btn btn-green" id="btnKnow">✅ จำได้แล้ว</button>
+              <button class="btn btn-pink" id="btnAgain">🔁 ทบทวนอีก</button>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+              <span class="known-chip">Known: <b id="knownBadge">0</b></span>
+              <span class="again-chip">Again: <b id="againBadge">0</b></span>
+            </div>
+          </div>
+          <div class="mini-card">
+            <h3>ปลายทางของชุดนี้</h3>
+            <div style="line-height:1.8;color:var(--muted)">
+              A1 ชุดนี้จะพาเด็กไปต่อที่<br>
+              <b style="color:#fff">A2</b> เกมฟังและทายความหมาย<br>
+              <b style="color:#fff">A3</b> เกมเลือกคำศัพท์เติมประโยค
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions" style="justify-content:center;margin-top:16px">
+        <button class="btn btn-violet" id="btnFinishReview">🏁 จบทบทวนชุดนี้</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="listScreen">
+    <div class="panel">
+      <div class="topbar">
+        <div class="eyebrow">🧠 คลังคำศัพท์ทั้งหมดของ Set 2</div>
+        <div class="toolbar">
+          <button class="btn btn-ghost" id="btnHome2">หน้าแรก</button>
+          <button class="btn btn-primary" id="btnBackToReview">กลับโหมดทบทวน</button>
+        </div>
+      </div>
+      <div class="grid-panel">
+        <div class="grid-head">
+          <input class="search" id="searchInput" placeholder="พิมพ์ค้นหาคำศัพท์หรือคำแปล เช่น rice, beach, หญ้า" />
+          <div class="pill" id="gridCount">30 คำ</div>
+        </div>
+        <div class="word-grid" id="wordGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="summaryScreen">
+    <div class="panel">
+      <div class="eyebrow">🏆 A1 Completed</div>
+      <h1 style="font-size:clamp(2rem,5vw,3.4rem)">Mission Review Complete</h1>
+      <div class="summary-grid">
+        <div class="card">
+          <div class="card-small-title">สรุปผลการทบทวน</div>
+          <div class="big-score" id="summaryScore">30 / 30</div>
+          <div class="meaning" style="margin-top:0">พร้อมเข้าสู่ A2 แล้ว 🚀</div>
+          <div class="example" id="summaryEval">ยอดเยี่ยมมาก เด็กคุ้นคำทั้งชุดแล้ว สามารถไปเล่นเกมฟังเสียงต่อได้เลย</div>
+        </div>
+        <div class="card">
+          <table>
+            <tr><th>รายการ</th><th>ผลลัพธ์</th></tr>
+            <tr><td>จำนวนคำทั้งหมด</td><td id="sumTotal">30</td></tr>
+            <tr><td>จำได้แล้ว</td><td id="sumKnown">0</td></tr>
+            <tr><td>ทบทวนอีก</td><td id="sumAgain">0</td></tr>
+            <tr><td>คำใกล้เสียงในชุด</td><td>15 คู่</td></tr>
+            <tr><td>ปลายทาง</td><td>A2 → A3</td></tr>
+          </table>
+          <div class="footer-note">
+            ใช้หน้าคลังคำศัพท์นี้เป็นหน้าเปิดก่อนเล่นจริงได้เลย หรือแคปภาพ/ทำ PDF ประกอบคอร์สก็สวยมาก 🌌
+          </div>
+        </div>
+      </div>
+      <div class="actions" style="justify-content:center;margin-top:18px">
+        <button class="btn btn-primary" id="btnRestart">เล่นทบทวนอีกครั้ง</button>
+        <button class="btn btn-violet" id="btnGoListAfter">เปิดคลังคำทั้งหมด</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const bank = [
+  {word:"rice", meaning:"ข้าว", ipa:"/raɪs/", pair:"rise", type:"Noun", example:"I eat rice every day."},
+  {word:"rise", meaning:"ลุกขึ้น / เพิ่มขึ้น", ipa:"/raɪz/", pair:"rice", type:"Verb", example:"The sun will rise soon."},
+  {word:"glass", meaning:"แก้ว / กระจก", ipa:"/glæs/", pair:"grass", type:"Noun", example:"This glass is very clear."},
+  {word:"grass", meaning:"หญ้า", ipa:"/græs/", pair:"glass", type:"Noun", example:"The grass is green."},
+  {word:"berry", meaning:"ผลไม้ตระกูลเบอร์รี", ipa:"/ˈberi/", pair:"very", type:"Noun", example:"I like sweet berry jam."},
+  {word:"very", meaning:"มาก", ipa:"/ˈveri/", pair:"berry", type:"Adverb", example:"She is very kind."},
+  {word:"walk", meaning:"เดิน", ipa:"/wɔːk/", pair:"work", type:"Verb", example:"We walk to school."},
+  {word:"work", meaning:"ทำงาน", ipa:"/wɜːrk/", pair:"walk", type:"Verb", example:"My mother works at home."},
+  {word:"code", meaning:"รหัส", ipa:"/koʊd/", pair:"coat", type:"Noun", example:"Type the code carefully."},
+  {word:"coat", meaning:"เสื้อโค้ต", ipa:"/koʊt/", pair:"code", type:"Noun", example:"His coat is blue."},
+  {word:"beach", meaning:"ชายหาด", ipa:"/biːtʃ/", pair:"peach", type:"Noun", example:"We play at the beach."},
+  {word:"peach", meaning:"ลูกพีช", ipa:"/piːtʃ/", pair:"beach", type:"Noun", example:"A peach is sweet."},
+  {word:"pool", meaning:"สระน้ำ", ipa:"/puːl/", pair:"pull", type:"Noun", example:"The kids swim in the pool."},
+  {word:"pull", meaning:"ดึง", ipa:"/pʊl/", pair:"pool", type:"Verb", example:"Pull the door, please."},
+  {word:"desk", meaning:"โต๊ะเรียน / โต๊ะทำงาน", ipa:"/desk/", pair:"disk", type:"Noun", example:"My books are on the desk."},
+  {word:"disk", meaning:"แผ่นดิสก์", ipa:"/dɪsk/", pair:"desk", type:"Noun", example:"Save the file on the disk."},
+  {word:"man", meaning:"ผู้ชาย", ipa:"/mæn/", pair:"men", type:"Noun", example:"The man is smiling."},
+  {word:"men", meaning:"ผู้ชายหลายคน", ipa:"/men/", pair:"man", type:"Noun", example:"The men are waiting."},
+  {word:"pack", meaning:"แพ็ก / ห่อ", ipa:"/pæk/", pair:"back", type:"Noun / Verb", example:"This is a snack pack."},
+  {word:"back", meaning:"ด้านหลัง / กลับ", ipa:"/bæk/", pair:"pack", type:"Noun / Adverb", example:"Please come back soon."},
+  {word:"night", meaning:"กลางคืน", ipa:"/naɪt/", pair:"light", type:"Noun", example:"Good night, everyone."},
+  {word:"light", meaning:"แสง", ipa:"/laɪt/", pair:"night", type:"Noun", example:"Turn on the light."},
+  {word:"chair", meaning:"เก้าอี้", ipa:"/tʃer/", pair:"share", type:"Noun", example:"Sit on the chair."},
+  {word:"share", meaning:"แบ่งปัน", ipa:"/ʃer/", pair:"chair", type:"Verb", example:"Please share your toys."},
+  {word:"fan", meaning:"พัดลม / แฟนคลับ", ipa:"/fæn/", pair:"van", type:"Noun", example:"The fan is spinning fast."},
+  {word:"van", meaning:"รถตู้", ipa:"/væn/", pair:"fan", type:"Noun", example:"The van is white."},
+  {word:"road", meaning:"ถนน", ipa:"/roʊd/", pair:"rode", type:"Noun", example:"The road is long."},
+  {word:"rode", meaning:"ขี่ / เดินทางโดย... (อดีต)", ipa:"/roʊd/", pair:"road", type:"Verb (past)", example:"He rode a bike yesterday."},
+  {word:"soap", meaning:"สบู่", ipa:"/soʊp/", pair:"soup", type:"Noun", example:"Wash your hands with soap."},
+  {word:"soup", meaning:"ซุป", ipa:"/suːp/", pair:"soap", type:"Noun", example:"The soup is hot."}
+];
+
+const stars = document.getElementById('stars');
+for(let i=0;i<120;i++){
+  const s=document.createElement('span'); s.className='star';
+  s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+  s.style.animationDuration=(2+Math.random()*5)+'s'; s.style.animationDelay=(Math.random()*3)+'s';
+  s.style.opacity=(.2+Math.random()*.8).toFixed(2); stars.appendChild(s);
+}
+const planets = document.getElementById('planets');
+[
+  {size:170,left:'-40px',top:'9%',bg:'linear-gradient(180deg,#67e8f9,#2563eb)'},
+  {size:96,left:'86%',top:'16%',bg:'linear-gradient(180deg,#f472b6,#8b5cf6)'},
+  {size:130,left:'72%',top:'72%',bg:'linear-gradient(180deg,#fde68a,#f59e0b)'}
+].forEach(p=>{const d=document.createElement('div');d.className='planet';d.style.width=d.style.height=p.size+'px';d.style.left=p.left;d.style.top=p.top;d.style.background=p.bg;planets.appendChild(d)});
+
+const $ = id => document.getElementById(id);
+const screens = ['startScreen','reviewScreen','listScreen','summaryScreen'];
+let current = 0;
+const known = new Set();
+const again = new Set();
+let filtered = [...bank];
+let voice = null;
+
+function showScreen(id){screens.forEach(s=>$(s).classList.remove('active')); $(id).classList.add('active');}
+function loadVoices(){const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/en/i.test(v.lang)) || vs[0] || null;}
+loadVoices(); speechSynthesis.onvoiceschanged=loadVoices;
+function speak(text, slow=false){speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=slow?.58:.82; u.pitch=1.04; if(voice)u.voice=voice; speechSynthesis.speak(u);}
+function beep(freq=620,dur=.08,type='sine',vol=.03){try{const ctx=new (window.AudioContext||window.webkitAudioContext)(); const o=ctx.createOscillator(); const g=ctx.createGain(); o.type=type; o.frequency.value=freq; g.gain.value=vol; o.connect(g); g.connect(ctx.destination); o.start(); g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime+dur); o.stop(ctx.currentTime+dur);}catch(e){}}
+
+function renderCard(){
+  const item = bank[current];
+  $('smallTitle').textContent = `Signal ${String(current+1).padStart(2,'0')}`;
+  $('wordText').textContent = item.word;
+  $('phoneticText').textContent = item.ipa;
+  $('meaningText').textContent = item.meaning;
+  $('exampleText').innerHTML = `<b>Example:</b> ${item.example}`;
+  $('typeText').textContent = item.type;
+  $('pairText').textContent = item.pair;
+  $('hudCount').textContent = `📘 คำที่ ${current+1} / ${bank.length}`;
+  $('bigIndex').textContent = String(current+1).padStart(2,'0');
+  updateProgress();
+}
+
+function updateProgress(){
+  const reviewed = current+1;
+  const pct = (reviewed/bank.length)*100;
+  $('progressFill').style.width = pct+'%';
+  $('progressText').textContent = `${reviewed} / ${bank.length}`;
+  $('hudKnown').textContent = `✅ จำได้ ${known.size}`;
+  $('hudAgain').textContent = `🔁 ทบทวนอีก ${again.size}`;
+  $('knownBadge').textContent = known.size;
+  $('againBadge').textContent = again.size;
+  let text = 'MISSION START';
+  if(pct >= 100) text='🌌 REVIEW COMPLETE';
+  else if(pct >= 80) text='⚡ ALMOST COMPLETE';
+  else if(pct >= 50) text='🚀 HALF WAY';
+  $('statusText').textContent = text;
+}
+
+function markKnown(){
+  known.add(bank[current].word); again.delete(bank[current].word); beep(880,.11,'triangle',.05); updateProgress(); renderGrid();
+}
+function markAgain(){
+  again.add(bank[current].word); known.delete(bank[current].word); beep(240,.11,'sawtooth',.05); updateProgress(); renderGrid();
+}
+function nextCard(){ if(current < bank.length-1){ current++; renderCard(); } else showSummary(); }
+function prevCard(){ if(current>0){ current--; renderCard(); } }
+
+function renderGrid(){
+  const q = $('searchInput').value.trim().toLowerCase();
+  filtered = bank.filter(item => (item.word+' '+item.meaning+' '+item.pair).toLowerCase().includes(q));
+  $('gridCount').textContent = `${filtered.length} คำ`;
+  const html = filtered.map(item => {
+    let cls='', txt='ยังไม่จัดสถานะ';
+    if(known.has(item.word)){cls='known'; txt='จำได้แล้ว';}
+    else if(again.has(item.word)){cls='again'; txt='ทบทวนอีก';}
+    return `<div class="word-tile" data-word="${item.word}">
+      <div class="tile-word">${item.word}</div>
+      <div class="tile-mean">${item.meaning}</div>
+      <div class="tile-tag">${item.ipa} • pair: ${item.pair}</div>
+      <div class="review-status ${cls}">${txt}</div>
+      <div class="mini-actions"><button class="btn btn-ghost tile-speak" data-word="${item.word}">🔊 ฟัง</button><button class="btn btn-ghost tile-open" data-word="${item.word}">เปิดการ์ด</button></div>
+    </div>`
+  }).join('');
+  $('wordGrid').innerHTML = html || '<div class="word-tile"><div class="tile-word">ไม่พบคำที่ค้นหา</div></div>';
+  document.querySelectorAll('.tile-speak').forEach(btn=>btn.onclick=()=>speak(btn.dataset.word));
+  document.querySelectorAll('.tile-open').forEach(btn=>btn.onclick=()=>{const idx=bank.findIndex(x=>x.word===btn.dataset.word); if(idx>=0){current=idx; renderCard(); showScreen('reviewScreen');}});
+}
+
+function showSummary(){
+  $('summaryScore').textContent = `${known.size + again.size} / ${bank.length}`;
+  $('sumKnown').textContent = known.size;
+  $('sumAgain').textContent = again.size;
+  let msg='ยอดเยี่ยมมาก เด็กคุ้นคำทั้งชุดแล้ว สามารถไปเล่นเกมฟังเสียงต่อได้เลย';
+  if(again.size > known.size) msg='ชุดนี้ยังมีหลายคำที่ควรทบทวนอีกนิด แล้วค่อยเข้าสู่ A2 จะมั่นใจกว่า';
+  else if(again.size > 0) msg='ดีมาก มีบางคำที่ติ๊กไว้ให้ทบทวนต่อ ก่อนเข้าสู่ภารกิจฟังเสียง';
+  $('summaryEval').textContent = msg;
+  showScreen('summaryScreen');
+}
+
+$('btnStartReview').onclick = ()=>{showScreen('reviewScreen'); renderCard();};
+$('btnOpenList').onclick = ()=>{renderGrid(); showScreen('listScreen');};
+$('btnSpeak').onclick = ()=>{speak(bank[current].word); beep(660,.06,'square',.02);};
+$('btnPrev').onclick = prevCard;
+$('btnNext').onclick = nextCard;
+$('btnKnow').onclick = markKnown;
+$('btnAgain').onclick = markAgain;
+$('btnFinishReview').onclick = showSummary;
+$('btnHome1').onclick = $('btnHome2').onclick = ()=>showScreen('startScreen');
+$('btnList1').onclick = ()=>{renderGrid(); showScreen('listScreen');};
+$('btnBackToReview').onclick = ()=>{renderCard(); showScreen('reviewScreen');};
+$('btnRestart').onclick = ()=>{current=0; known.clear(); again.clear(); renderCard(); renderGrid(); showScreen('reviewScreen');};
+$('btnGoListAfter').onclick = ()=>{renderGrid(); showScreen('listScreen');};
+$('searchInput').addEventListener('input', renderGrid);
+
+renderGrid();
+</script>
+</body>
+</html>
